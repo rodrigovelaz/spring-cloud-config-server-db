@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.rodrigovelaz.springcloudconfigserver.db.persistence.entity.SpringCloudConfig;
 import org.rodrigovelaz.springcloudconfigserver.db.persistence.repository.SpringCloudConfigRepository;
 import org.slf4j.Logger;
@@ -43,16 +45,14 @@ public class DbEnvironmentRepository implements EnvironmentRepository, SearchPat
 	
 	private Logger logger = LoggerFactory.getLogger(DbEnvironmentRepository.class);
 	
+	private DataSource dataSource;
 	private SpringCloudConfigRepository springCloudConfigRepository;
-	
-	public SpringCloudConfigRepository getSpringCloudConfigRepository() {
-		return springCloudConfigRepository;
-	}
 
-	public void setSpringCloudConfigRepository(SpringCloudConfigRepository springCloudConfigRepository) {
-		this.springCloudConfigRepository = springCloudConfigRepository;
-	}
-	
+	public DataSource getDataSource() { return dataSource; }
+	public void setDataSource(DataSource dataSource) { this.dataSource = dataSource; }
+	public SpringCloudConfigRepository getSpringCloudConfigRepository() { return springCloudConfigRepository; }
+	public void setSpringCloudConfigRepository(SpringCloudConfigRepository springCloudConfigRepository) { this.springCloudConfigRepository = springCloudConfigRepository; }
+
 	private String getTableName(String application, String profile, String label) {
 		return application + "-" + profile;
 	}
@@ -60,7 +60,7 @@ public class DbEnvironmentRepository implements EnvironmentRepository, SearchPat
 	private String getLocation() {
 		
 		try {
-			return this.springCloudConfigRepository.getJdbcTemplate().getDataSource().getConnection().getMetaData().getURL();
+			return this.dataSource.getConnection().getMetaData().getURL();
 		}
 		catch (SQLException e) {
 			throw new RuntimeException(e);

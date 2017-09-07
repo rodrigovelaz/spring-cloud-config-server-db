@@ -16,6 +16,8 @@
 
 package org.rodrigovelaz.springcloudconfigserver.db.config;
 
+import javax.sql.DataSource;
+
 import org.rodrigovelaz.springcloudconfigserver.db.business.DbEnvironmentRepository;
 import org.rodrigovelaz.springcloudconfigserver.db.persistence.repository.SpringCloudConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,6 @@ import org.springframework.cloud.config.server.environment.EnvironmentRepository
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 
 /**
@@ -41,16 +42,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class DbEnvironmentRepositoryConfig {
 
 	@Autowired
-    private JdbcTemplate jdbcTemplate;
+    private DataSource dataSource;
+	
+	@Autowired
+    private SpringCloudConfigRepository repository;
 	
 	@Bean
 	public DbEnvironmentRepository dbEnvironmentRepository() {
-		
-		SpringCloudConfigRepository repository = new SpringCloudConfigRepository();
-		repository.setJdbcTemplate(this.jdbcTemplate);
-		
 		DbEnvironmentRepository dbEnvironmentRepository = new DbEnvironmentRepository();
-		dbEnvironmentRepository.setSpringCloudConfigRepository(repository);
+		dbEnvironmentRepository.setDataSource(this.dataSource);
+		dbEnvironmentRepository.setSpringCloudConfigRepository(this.repository);
 		return dbEnvironmentRepository;
 	}
 	

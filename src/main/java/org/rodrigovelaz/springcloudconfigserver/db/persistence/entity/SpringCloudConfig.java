@@ -16,6 +16,9 @@
 
 package org.rodrigovelaz.springcloudconfigserver.db.persistence.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * 
  * Entity that represents an application configuration
@@ -23,8 +26,10 @@ package org.rodrigovelaz.springcloudconfigserver.db.persistence.entity;
  * @author Rodrigo Velaz
  *
  */
+@Entity
 public class SpringCloudConfig {
 
+	@Id
 	private Long id;
 	private String property; 
 	private String value;
