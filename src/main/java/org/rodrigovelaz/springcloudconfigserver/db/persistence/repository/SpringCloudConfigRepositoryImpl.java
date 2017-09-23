@@ -52,7 +52,7 @@ public class SpringCloudConfigRepositoryImpl implements SpringCloudConfigReposit
 	@Override
 	public List<SpringCloudConfig> findByTableName(String tableName) throws SQLException {
 	     
-		String query = "SELECT id, property, value FROM \"" + tableName.toUpperCase() + "\"";
+		String query = "SELECT id, property, value FROM " + tableName;
 		
 		@SuppressWarnings("unchecked")
 		List<SpringCloudConfig> list = entityManager.createNativeQuery(query, SpringCloudConfig.class).getResultList();

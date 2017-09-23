@@ -54,7 +54,10 @@ public class DbEnvironmentRepository implements EnvironmentRepository, SearchPat
 	public void setSpringCloudConfigRepository(SpringCloudConfigRepository springCloudConfigRepository) { this.springCloudConfigRepository = springCloudConfigRepository; }
 
 	private String getTableName(String application, String profile, String label) {
-		return application + "-" + profile;
+
+		String tableName = application + "_" + profile;
+		tableName = tableName.replaceAll("-", "_").toLowerCase();
+		return tableName;
 	}
 	
 	private String getLocation() {
