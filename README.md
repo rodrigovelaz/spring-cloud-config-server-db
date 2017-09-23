@@ -33,14 +33,16 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
 
 4. Create a table for each application and environment that you need
 
-4.1. Table name must be: <application>_<environment> (All in underscore)  
+4.1. Table name must be: [application_name]_[environment] (All in underscore)  
 
 4.2. Fields must be: long id, string property, string value
 
-Oracle example:
+Example:
 
-application: x-service
+applicationName: x-service
 environment: dev
+
+Oracle script:
 
 CREATE TABLE x_service_dev 
 (	
@@ -49,7 +51,7 @@ CREATE TABLE x_service_dev
 	value VARCHAR2(500 CHAR)
 );
 
-MySqlExample
+MySql script:
 
 CREATE TABLE x_service_dev 
 (
