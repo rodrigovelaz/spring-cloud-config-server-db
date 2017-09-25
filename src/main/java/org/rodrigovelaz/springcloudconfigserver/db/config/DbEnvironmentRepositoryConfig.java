@@ -33,7 +33,6 @@ import org.springframework.context.annotation.Profile;
  * Db Enviroment Repository configuration
  * 
  * @author Rodrigo Velaz
- * @see JdbcTemplate
  *
  */
 @Configuration

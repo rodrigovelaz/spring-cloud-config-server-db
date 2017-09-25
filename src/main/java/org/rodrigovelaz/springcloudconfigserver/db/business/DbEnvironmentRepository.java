@@ -55,8 +55,8 @@ public class DbEnvironmentRepository implements EnvironmentRepository, SearchPat
 
 	private String getTableName(String application, String profile, String label) {
 
-		String tableName = application + "_" + profile;
-		tableName = tableName.replaceAll("-", "_").toLowerCase();
+		String tableName = application + "-" + profile;
+		tableName = tableName.toLowerCase();
 		return tableName;
 	}
 	
